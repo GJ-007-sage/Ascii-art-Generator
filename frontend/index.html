@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Art Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>🎨 ASCII Art Generator</h1>
+    <input type="file" id="imageInput">
+    <button onclick="uploadImage()">Convert to ASCII</button>
+    <pre id="asciiOutput"></pre> <!-- ASCII art will be displayed here -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
