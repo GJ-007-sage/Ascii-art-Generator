@@ -1,32 +1,26 @@
-const socket = io.connect("http://localhost:5000");
-
-// Real-time webcam ASCII
-socket.on("ascii_frame", function(data) {
-    document.getElementById("ascii-video-output").textContent = data.ascii;
-});
-
-// Image Upload ASCII Conversion
 function uploadImage() {
-    const fileInput = document.getElementById("imageUpload");
-    const file = fileInput.files[0];
-
-    if (!file) {
-        alert("Please select an image.");
+    let input = document.getElementById("imageInput");
+    if (input.files.length === 0) {
+        alert("Please select an image!");
         return;
     }
-
-    const formData = new FormData();
-    formData.append("file", file);
-
+    let formData = new FormData();
+    formData.append("image", input.files[0]);
     fetch("/upload", {
         method: "POST",
         body: formData
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById("ascii-image-output").textContent = data.ascii;
+        if (data.error) {
+            alert("Error: " + data.error);
+        } else {
+            document.getElementById("asciiOutput").textContent = data.ascii;
+        }
     })
-    .catch(error => {
-        console.error("Error:", error);
-    });
+    .catch(error => console.error("Error:", error));
 }
+fetch("https://ascii-art-generator-gj.onrender.com/upload", {
+    method: "POST",
+    body: formData
+})
