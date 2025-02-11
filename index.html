@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCII Art Generator</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>ASCII Converter</title>
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <h1>🎨 ASCII Art Generator</h1>
-    <input type="file" id="imageInput">
-    <button onclick="uploadImage()">Convert to ASCII</button>
-    <pre id="asciiOutput"></pre> <!-- ASCII art will be displayed here -->
+    <h1>ASCII Converter</h1>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Image Upload Option -->
+    <input type="file" id="imageUpload">
+    <button onclick="uploadImage()">Convert Image</button>
+    
+    <pre id="ascii-image-output">Upload an image to convert.</pre>
+
+    <hr>
+
+    <!-- Live Camera ASCII -->
+    <h2>Live ASCII Camera</h2>
+    <pre id="ascii-video-output">Loading...</pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+    <script src="static/script.js"></script>
 </body>
 </html>
+

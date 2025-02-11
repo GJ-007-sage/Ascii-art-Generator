@@ -1,19 +1,24 @@
-from PIL import Image
+import cv2
+import numpy as np
 
-ASCII_CHARS = "@%#*+=-:. "
+ASCII_CHARS = "@%#*+=-:. "  # ASCII density mapping
 
-def image_to_ascii(image_path, width=100):
-    image = Image.open(image_path)
-    image = image.convert("L")  # Convert to grayscale
+def image_to_ascii(image, width=100):
+    """Convert an image (numpy array) to ASCII art"""
+    # Convert to grayscale
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    aspect_ratio = image.height / image.width
-    new_height = int(width * aspect_ratio)
-    image = image.resize((width, new_height))
+    # Resize for ASCII
+    aspect_ratio = gray.shape[1] / gray.shape[0]
+    new_width = width
+    new_height = int(new_width / aspect_ratio * 0.55)  # Adjust height to maintain aspect ratio
+    gray_resized = cv2.resize(gray, (new_width, new_height))
 
-    pixels = image.getdata()
-    ascii_str = "".join(ASCII_CHARS[pixel // 32] for pixel in pixels)
-    
-    ascii_art = "\n".join(
-        ascii_str[i : i + width] for i in range(0, len(ascii_str), width)
+    # Convert pixels to ASCII
+    ascii_result = "\n".join(
+        "".join(ASCII_CHARS[pixel // (256 // len(ASCII_CHARS))] for pixel in row)
+        for row in gray_resized
     )
-    return ascii_art
+
+    return ascii_result
+
