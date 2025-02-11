@@ -4,7 +4,8 @@ import cv2
 import time
 import numpy as np
 import os
-from ascii_converter import image_to_ascii
+from ascii_converter.converter import image_to_ascii
+
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
