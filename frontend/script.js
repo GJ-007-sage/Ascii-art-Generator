@@ -22,7 +22,7 @@ function uploadImage() {
     })
     .catch(error => console.error("Error:", error));
 }
-fetch("https://ascii-art-generator.onrender.com/upload", {
+fetch("https://ascii-art-generator-gj.onrender.com/upload", {
     method: "POST",
     body: formData
 })
