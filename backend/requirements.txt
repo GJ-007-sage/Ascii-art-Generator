@@ -2,3 +2,4 @@ flask
 gunicorn
 pillow
 flask-socketio
+opencv-python-headless
